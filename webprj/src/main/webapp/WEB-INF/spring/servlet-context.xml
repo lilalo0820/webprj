@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+<!-- 설정파일 분리하기 -->
+
+<!-- 어노테이션으로 객체 DI -->
+	<context:annotation-config></context:annotation-config>
+<!-- 어노테이션으로 객체 DI -->
+	<bean id="/index" class="com.newlecture.web.controller.IndexController">
+	</bean>
+
+	<bean id="/notice/list" class="com.newlecture.web.controller.notice.ListController">
+<!-- 		디펜던시 인젝션 IoC(bean바구니)에 등록하여 사용 -->
+<!-- 						어노테이션으로 객체 DI -->
+<!-- 				<property name="noticeService" ref="noticeService"></property> -->
+<!-- 						어노테이션으로 객체 DI -->
+<!-- 		디펜던시 인젝션 IoC(bean바구니)에 등록하여 사용 -->
+	</bean>
+
+	<bean id="/notice/detail" class="com.newlecture.web.controller.notice.DetailController">
+	</bean>
+
+	<!-- tiles 설정 -->
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView">
+		</property>
+		<property name="order" value="1"></property>
+	</bean>
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles.xml"></property>
+	</bean>
+	<!-- tiles 설정 -->
+
+	<!-- localhost:8080/index ->> localhost:8080/WEB-INF/view/index.jsp -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"></property>
+		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="2"></property>		<!-- tiles 설정 -->  
+	</bean>
+	
+	<!-- /static/ ->> webapp/static/ -->
+	<!-- allow for images/css/js to be accessed --> 
+	<!-- 	static 정적파일 사용가능하도록 허용 -->
+	<mvc:resources location="/static/" mapping="/**"></mvc:resources>
+
+</beans>

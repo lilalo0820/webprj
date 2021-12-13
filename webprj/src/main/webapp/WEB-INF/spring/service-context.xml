@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+<!-- 설정파일 분리하기 -->
+
+<!-- 어노테이션으로 객체 DI -->
+<!-- 	어노테이션 enable context:component-scan으로 대체가능-->
+<!-- 	<context:annotation-config></context:annotation-config> -->
+<!-- 	어노테이션 enable context:component-scan으로 대체가능-->
+<!-- 	component scan 범위 지정 -->
+	<context:component-scan base-package="com.newlecture.web.service"></context:component-scan>
+<!-- 어노테이션으로 객체 DI -->
+
+<!-- 	디펜던시 인젝션 IoC(bean바구니)에 등록하여 사용-->
+<!-- 	<bean name="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService"> -->
+<!-- 	DB 연결정보 분리하기 -->
+<!-- 어노테이션으로 객체 DI -->
+<!-- 		<property name="dataSource" ref="dataSource"></property> -->
+<!-- 어노테이션으로 객체 DI -->
+<!-- 	DB 연결정보 분리하기 -->
+<!-- 	</bean> -->
+<!-- 	디펜던시 인젝션 IoC(bean바구니)에 등록하여 사용-->
+	
+<!-- 	DB 연결정보 분리하기 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521/xepdb1"></property>
+		<property name="username" value="test"></property>
+		<property name="password" value="1234"></property>
+	</bean>
+<!-- 	DB 연결정보 분리하기 -->
+
+</beans>
